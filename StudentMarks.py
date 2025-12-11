@@ -10,6 +10,10 @@ from tkinter import ttk, messagebox
 
 class StudentMarksApp:
     def __init__(self, root):
+        '''
+        The program starts with metadata and importation of Tkinter modules that are needed to develop a graphical user interface including ttk module used to develop Treeview widgets and the messagebox module used to handle dialogs. The StudentMarksApp class instance is launched into an 800x500 window part, whereby it builds a student list, loads the relevant data and builds the GUI layout entailing a titling element, a tabular display area, a delineated details section and a mix of interactive controls such as an option to list all entries, unveil the highest score, present the lowest score and an exit button that is red in color and located conspicuously.
+        '''
+        
         self.root = root
         self.root.title("Student Marks Manager")
         self.root.geometry("800x500")
@@ -45,6 +49,9 @@ class StudentMarksApp:
                  width=20, bg="lightcoral").pack(side=tk.LEFT, padx=5)
     
     def load_students(self):
+        '''
+        The load-students procedure will open the file studentMarks.txt and the first line will be used to identify the number of students as a result of the first line, then all the other lines will be processed individually read and a structured dictionary will be formed in the form of the student identifier, name, three course work assessments with a final examination score. In case the necessary file is not available, the implementation initiates an error notification.
+        '''
         try:
             with open("studentMarks.txt", "r") as file:
                 num_students = int(file.readline().strip())
@@ -111,6 +118,9 @@ class StudentMarksApp:
         self.populate_table()
     
     def populate_table(self):
+        '''
+        The process of populating the table is done via the populate_table() function and computes percentages and grades of each row and assigns the scores in relation to their maximums (e.g. 30/60). The table has an interactive element which triggers selection events when rows are selected.
+        '''
         for item in self.tree.get_children():
             self.tree.delete(item)
         
@@ -129,6 +139,11 @@ class StudentMarksApp:
             ))
     
     def on_student_select(self, event):
+        '''
+        As a row is clicked on a table, onstudentselect only captures. 
+        the event, is what decides the index of the chosen student, and calls showstudentdetails. 
+        to provide formatted information.
+        '''
         selection = self.tree.selection()
         if selection:
             item = selection[0]
@@ -136,6 +151,9 @@ class StudentMarksApp:
             self.show_student_details(student_index)
     
     def show_student_details(self, index):
+        '''
+        The system provides the structured student data, in the form of names, ID, coursework total, exam score, percentage and grade in a special label below the table thus making individual and personal analysis of the students easy.
+        '''
         if 0 <= index < len(self.students):
             student = self.students[index]
             percentage = self.calc_percentage(student)
@@ -191,6 +209,13 @@ Grade: {grade}
                           f"Grade: {self.get_grade(percentage)}")
 
 if __name__ == "__main__":
+    '''
+    The standard conditional statement provided above: if __name__ == "__main|: is the cause of the prompting of the instantiation of the Tkinter root window,  
+    the creation of the StudentMarksApp object, and the main event loop is launched.  
+    Subsequently, this block enables one to have extensive student administration system,  
+    a synergistical combination of data processing, graphing and analytical appraisal on a single user interface.
+    '''
     root = tk.Tk()
     app = StudentMarksApp(root)
     root.mainloop()
+
