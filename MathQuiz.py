@@ -2,7 +2,7 @@
 Vince Michael J. Samson
 ID: 04-24-0147
 10/6/2025 - Oct.7,2026
-Advance Programming: Exercise 1 - Maths Quiz (Tkinter Version)
+Advance Programming: Exercise 1 - Maths Quiz
 '''
 
 import tkinter as tk
@@ -123,3 +123,4 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = MathQuizApp(root)
     root.mainloop()
+
